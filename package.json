@@ -38,6 +38,9 @@
     "webpack-dev-server": "3.1.14"
   },
   "dependencies": {
+    "events": "^3.0.0",
+    "flux": "^3.1.3",
+    "jquery": "^3.3.1",
     "kerberos": "^1.1.2",
     "mongodb": "^3.1.10",
     "react": "16.7.0",
