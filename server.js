@@ -1,5 +1,8 @@
 import express from 'express';
 import {MongoClient} from 'mongodb';
+import schema from './data/schema';
+import GraphQLHTTP from 'express-graphql';
+
 let app = express();
 
 app.use(express.static('public'));
@@ -22,13 +25,10 @@ app.use(express.static('public'));
     app.listen(3000, ()=> console.log('Server ready listen on port 3000'));
     const db = client.db(dbName);
 
-    app.get("/data/links", (req, res) => {
-      db.collection("links").find({}).toArray((err, links) => {
-        if (err) throw err;
-
-        res.json(links);
-      });
-    });
+    app.use('/graphql', GraphQLHTTP({
+      schema: schema(db),
+      graphiql: true
+    }));
 
     //client.close();
  });
